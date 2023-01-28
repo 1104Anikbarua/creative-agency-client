@@ -1,7 +1,7 @@
 import React from 'react';
-import customer1 from '../../images/customer-1.png';
-import customer2 from '../../images/customer-2.png';
-import customer3 from '../../images/customer-3.png';
+import customer1 from '../../../images/customer-1.png';
+import customer2 from '../../../images/customer-2.png';
+import customer3 from '../../../images/customer-3.png';
 
 const HomeFeedback = () => {
     const feedbacks = [
@@ -13,9 +13,9 @@ const HomeFeedback = () => {
         <div className='mt-[86px] mb-[100px] max-w-[1170px] mx-auto'>
             <h1 className='font-semibold text-[34px] text-center text-secondary mb-[100px]'>Clients <span className='text-accent'>Feedback</span></h1>
 
-            <div className='grid lg:grid-cols-3 gap-7 rounded'>
+            <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-7 rounded'>
                 {feedbacks.map((feedback, index) =>
-                    <div key={index} className="w-96 bg-base-100 shadow-xl border-2 border-slate-300">
+                    <div key={index} className="lg:w-96 bg-base-100 shadow-xl border-2 border-slate-300">
                         <div className="card-body">
                             <div className='flex items-center gap-5'>
                                 <img className='w-16 h-16' src={feedback.img} alt="" />
@@ -27,7 +27,8 @@ const HomeFeedback = () => {
                             </div>
                             <p className='text-info text-base pt-[14px]'>If a dog chews shoes whose shoes does he choose?</p>
                         </div>
-                    </div>)}
+                    </div>
+                )}
             </div>
         </div>
     );

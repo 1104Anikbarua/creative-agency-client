@@ -1,7 +1,7 @@
 import React from 'react';
-import service1 from '../../images/icons/service1.png'
-import service2 from '../../images/icons/service2.png'
-import service3 from '../../images/icons/service3.png'
+import service1 from '../../../images/icons/service1.png'
+import service2 from '../../../images/icons/service2.png'
+import service3 from '../../../images/icons/service3.png'
 
 const HomeServices = () => {
     const services = [
@@ -23,8 +23,6 @@ const HomeServices = () => {
                     )
                 }
             </div>
-
-
         </div>
     );
 };
