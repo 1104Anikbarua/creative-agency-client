@@ -31,7 +31,7 @@ const HomeWorks = () => {
                 <a href="#item2" className="btn btn-xs rounded-full text-white bg-primary">2</a>
                 <a href="#item3" className="btn btn-xs rounded-full text-white bg-primary">3</a>
                 <a href="#item4" className="btn btn-xs rounded-full text-white bg-primary">4</a>
-                <a href="#item5" className="btn btn-xs rounded-full text-white bg-primary">56</a>
+                <a href="#item5" className="btn btn-xs rounded-full text-white bg-primary">5</a>
             </div>
         </div>
     );
