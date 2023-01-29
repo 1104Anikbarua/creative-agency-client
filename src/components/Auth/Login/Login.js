@@ -1,18 +1,29 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
+import auth from '../../../firebase.init';
 import logo from '../../../images/logos/logo.png';
 import google from '../../../images/Social/google.png';
+import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
 
 const Login = () => {
 
-    const { register, handleSubmit, setError, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
-    const onSubmit = (data) => console.log(data);
+    const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
+
+    console.log(error)
+
+    const onSubmit = (data) => {
+        const email = data.email;
+        const password = data.password;
+        console.log(email, password)
+    };
 
     return (
         <>
             <div className='w-[1170px] mx-auto mt-11'>
-                <div>
+                <div className='mb-11'>
                     <img className='w-[170px] h-[48px] mx-auto' src={logo} alt="" />
                 </div>
                 <div className='w-[570px] border-2 border-slate-200 h-[460px] mx-auto'>
@@ -74,14 +85,21 @@ const Login = () => {
                             </label>
                         </div>
 
+                        <p className='text-base text-red-600'>{error?.message}</p>
+
+
                         <input className='cursor-pointer bg-secondary input input-bordered input-sm w-full max-w-xs mb-2' type="submit" value="Login" />
 
 
-                        <button className='flex items-center bg-secondary w-full max-w-xs rounded-lg'>
-                            <img className='w-8 h-8' src={google} alt="" />
-                            <span className='mx-auto'>Continue With Google</span>
-                        </button>
+                        <p className='text-base text-center text-secondary my-4'>New to Creative agency?<Link className='text-blue-600' to={'/signup'}> Create New Account</Link></p>
+
+
                     </form>
+                    <button onClick={() => signInWithGoogle()}
+                        className='flex items-center bg-secondary w-full max-w-xs rounded-lg mx-auto'>
+                        <img className='w-8 h-8' src={google} alt="" />
+                        <span className='mx-auto'>Continue With Google</span>
+                    </button>
                 </div>
             </div >
         </>
