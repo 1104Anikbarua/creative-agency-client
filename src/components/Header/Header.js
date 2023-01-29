@@ -8,7 +8,7 @@ const Header = () => {
         <Link className='text-neutral text-sm font-normal' to={'/portfolio'}>Our Portfolio</Link>
         <Link className='text-neutral text-sm font-normal' to={'/team'}>Our Team</Link>
         <Link className='text-neutral text-sm font-normal' to={'/contact'}>Contact Us</Link>
-        <button className="btn w-[134px] h-11 bg-secondary text-center text" to={'/Login'}>Login</button>
+        <Link className="btn w-[134px] h-11 bg-secondary text-center text" to={'/Login'}>Login</Link>
     </>
     return (
         <div className='bg-primary fixed top-0 left-0 right-0 mx-auto max-w-[1170px]'>
