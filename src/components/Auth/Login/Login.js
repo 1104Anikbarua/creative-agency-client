@@ -1,28 +1,56 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
 import logo from '../../../images/logos/logo.png';
 import google from '../../../images/Social/google.png';
-import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import LoadingSpinner from '../../Shared/LoadingSpinner/LoadingSpinner';
 
 const Login = () => {
 
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
-    const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
+    const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
 
-    console.log(error)
+    const [
+        signInWithEmailAndPassword,
+        emailUser,
+        emailLoading,
+        emailError,
+    ] = useSignInWithEmailAndPassword(auth);
 
     const onSubmit = (data) => {
         const email = data.email;
         const password = data.password;
-        console.log(email, password)
+        signInWithEmailAndPassword(email, password);
+        reset();
     };
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
+
+    useEffect(() => {
+        if (emailUser || googleUser) {
+            navigate(from, { replace: true });
+        }
+    }, [emailUser, googleUser, from, navigate])
+
+
+    if (emailLoading || googleLoading) {
+        return <LoadingSpinner></LoadingSpinner>;
+    }
+
+    let errorMessage;
+    if (emailError || googleError) {
+        errorMessage = <p className='text-red-600'>{emailError?.message}{googleError?.message}</p>
+    }
+
+
 
     return (
         <>
-            <div className='w-[1170px] mx-auto mt-11'>
+            <div className='w-[1170px] mx-auto mt-20'>
                 <div className='mb-11'>
                     <img className='w-[170px] h-[48px] mx-auto' src={logo} alt="" />
                 </div>
@@ -59,7 +87,7 @@ const Login = () => {
                         </div>
 
 
-                        <div className='form-control w-full max-w-xs'>
+                        <div className='form-control w-full max-w-xs mb-2'>
                             <label className="label">
                                 <span className="label-text text-secondary">Password</span>
                             </label>
@@ -84,8 +112,7 @@ const Login = () => {
                                 {errors.password?.type === 'minLength' && <span className='label-text-alt text-base text-red-600'>{errors.password.message}</span>}
                             </label>
                         </div>
-
-                        <p className='text-base text-red-600'>{error?.message}</p>
+                        {errorMessage}
 
 
                         <input className='cursor-pointer bg-secondary input input-bordered input-sm w-full max-w-xs mb-2' type="submit" value="Login" />
@@ -98,7 +125,7 @@ const Login = () => {
                     <button onClick={() => signInWithGoogle()}
                         className='flex items-center bg-secondary w-full max-w-xs rounded-lg mx-auto'>
                         <img className='w-8 h-8' src={google} alt="" />
-                        <span className='mx-auto'>Continue With Google</span>
+                        <span className='mx-auto text-base'>Continue With Google</span>
                     </button>
                 </div>
             </div >

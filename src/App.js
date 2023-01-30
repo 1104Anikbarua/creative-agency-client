@@ -2,14 +2,44 @@ import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import Home from './components/Homes/Home/Home';
 import Login from './components/Auth/Login/Login';
+import Signup from './components/Auth/Signup/Signup';
+import ServiceList from './components/Admin/ServiceList/ServiceList';
+import DashBoard from './components/DashBoard/DashBoard';
+import RequireAuth from './components/Auth/RequireAuth/RequireAuth';
+import Header from './components/Shared/Header/Header';
+import AddService from './components/Admin/AddService/AddService';
+import MakeAdmin from './components/Admin/MakeAdmin/MakeAdmin';
+import Order from './components/DashBoard/Order/Order';
+import Review from './components/DashBoard/Review/Review';
 
 function App() {
   return (
     <div className='lg:max-w-[1440px] mx-auto relative'>
+      {/* <Header></Header> */}
       <Routes>
-        <Route path='/' element={<Home></Home>}>
+
+        <Route path='/' element={<Home></Home>}></Route>
+        <Route path='/home' element={<Home></Home>}></Route>
+
+        <Route path='/dashboard' element={
+          <RequireAuth>
+            <DashBoard></DashBoard>
+          </RequireAuth>
+        }>
+          <Route index element={<ServiceList></ServiceList>}></Route>
+
+          <Route path='addservice' element={<AddService></AddService>}></Route>
+
+          <Route path='makeadmin' element={<MakeAdmin></MakeAdmin>}></Route>
+
+          <Route path='order' element={<Order></Order>}></Route>
+
+          <Route path='review' element={<Review></Review>}></Route>
         </Route>
+
         <Route path='/login' element={<Login></Login>}></Route>
+
+        <Route path='/signup' element={<Signup></Signup>}></Route>
       </Routes>
     </div>
   );

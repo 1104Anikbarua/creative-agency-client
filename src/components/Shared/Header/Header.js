@@ -1,17 +1,32 @@
 import React from 'react'
+import { useAuthState, useSignOut } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
-import logo from '../../images/logos/logo.png'
+import auth from '../../../firebase.init';
+import logo from '../../../images/logos/logo.png';
 
 const Header = () => {
+    const [user] = useAuthState(auth);
+    const [signOut] = useSignOut(auth);
+
     const menuItems = <>
         <Link className='text-neutral text-sm font-normal' to={'/'}>Home</Link>
         <Link className='text-neutral text-sm font-normal' to={'/portfolio'}>Our Portfolio</Link>
         <Link className='text-neutral text-sm font-normal' to={'/team'}>Our Team</Link>
         <Link className='text-neutral text-sm font-normal' to={'/contact'}>Contact Us</Link>
-        <Link className="btn w-[134px] h-11 bg-secondary text-center text" to={'/Login'}>Login</Link>
+
+        <>
+            {
+                user &&
+                <Link className='text-neutral text-sm font-normal' to={'/dashboard'}>DashBoard</Link>
+            }
+            {user ? <Link className="btn w-[134px] h-11 bg-secondary text-center text" onClick={() => signOut()} to={'/login'}>Logout</Link> :
+                <Link className="btn w-[134px] h-11 bg-secondary text-center text" to={'/Login'}>Login</Link>}
+
+        </>
+
     </>
     return (
-        <div className='bg-primary fixed top-0 left-0 right-0 mx-auto max-w-[1170px]'>
+        <div className='bg-primary fixed top-0 left-0 mx-auto max-w-[1170px] right-0 z-50'>
             <div className="navbar">
 
                 <div className="navbar-start">

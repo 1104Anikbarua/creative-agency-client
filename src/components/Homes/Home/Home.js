@@ -1,6 +1,6 @@
 import React from 'react';
 import HomeBrand from '../HomeBrand/HomeBrand';
-import Header from '../../Header/Header';
+import Header from '../../Shared/Header/Header';
 import HomeBanner from '../HomeBanner/HomeBanner';
 import HomeServices from '../HomeServices/HomeServices';
 import HomeWorks from '../HomeWorks/HomeWorks';
