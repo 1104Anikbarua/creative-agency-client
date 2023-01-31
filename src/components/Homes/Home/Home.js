@@ -6,6 +6,7 @@ import HomeServices from '../HomeServices/HomeServices';
 import HomeWorks from '../HomeWorks/HomeWorks';
 import HomeFeedback from '../HomeFeedback/HomeFeedback';
 import HomeProject from '../HomeProject/HomeProject';
+import './Home.css'
 
 const Home = () => {
     return (
@@ -14,8 +15,10 @@ const Home = () => {
                 <div className='max-w-[1170px] mx-auto'>
                 </div>
             </div> */}
-            <Header></Header>
-            <HomeBanner></HomeBanner>
+            <header>
+                <Header></Header>
+                <HomeBanner></HomeBanner>
+            </header>
             <HomeBrand></HomeBrand>
             <HomeServices></HomeServices>
             <HomeWorks></HomeWorks>

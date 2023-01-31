@@ -5,7 +5,7 @@ const LoadingSpinner = () => {
     return (
         <HashLoader className='my-80 mx-auto'
             color={'#009444'}
-            size={50}
+            size={70}
             aria-label="Loading Spinner"
             data-testid="loader"
         />

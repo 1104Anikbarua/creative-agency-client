@@ -2,26 +2,31 @@
     {
         "img": "https://i.ibb.co/b5hQnXj/service1.png",
         "name": "Web & Mobile Design",
-        "description": "We craft stunning and amazing web UI, using a well drrafted UX to fit your product.Web design refers to the design of websites that are displayed on the internet. It usually refers to the user experience aspects of website development rather than software development. A web designer works on the appearance, layout, and, in some cases, content of a website."
+        "description": "We craft stunning and amazing web UI, using a well drrafted UX to fit your product.Web design refers to the design of websites that are displayed on the internet. It usually refers to the user experience aspects of website development rather than software development. A web designer works on the appearance, layout, and, in some cases, content of a website.",
+        "price": 600
     },
     {
         "img": "https://i.ibb.co/ZKw5yDq/service2.png",
         "name": "Graphic design",
-        "description": "Amazing flyers, social media posts and brand representations that would make your brand stand out."
+        "description": "Amazing flyers, social media posts and brand representations that would make your brand stand out.",
+        "price": 100
     },
     {
         "img": "https://i.ibb.co/V9vvYVX/service3.png",
         "name": "Web development",
-        "description": "With well written codes, we build amazing apps for all platforms, mobile and web apps in general."
+        "description": "With well written codes, we build amazing apps for all platforms, mobile and web apps in general.",
+        "price": 200
     },
     {
         "img": "https://i.ibb.co/gWw9Qzj/service4.png",
         "name": "Ux Writing",
-        "description": "A design system isn't only a collection of the assets and components you use to build a digital product. All the pieces may be consistent, but that doesn't mean the assembled results will be.Your product is more than just a pile of reusable UI elements. It has structure and meaning. It's not a generic web page, it's the embodiment of a system of concepts."
+        "description": "A design system isn't only a collection of the assets and components you use to build a digital product. All the pieces may be consistent, but that doesn't mean the assembled results will be.Your product is more than just a pile of reusable UI elements. It has structure and meaning. It's not a generic web page, it's the embodiment of a system of concepts.",
+        "price": 50
     },
     {
         "img": "https://i.ibb.co/PGrbDMs/service5.png",
         "name": "App devlopment",
-        "description": "These applications are developed using the platforms default solutions, developers have full and easier access to the devices capabilities; like all the devics sensors, the users address book, and whatever the latest and greatest new bit of technology the phone offers."
+        "description": "These applications are developed using the platforms default solutions, developers have full and easier access to the devices capabilities; like all the devics sensors, the users address book, and whatever the latest and greatest new bit of technology the phone offers.",
+        "price": 400
     }
 ]

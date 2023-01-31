@@ -1,8 +1,10 @@
 import { faCloudArrowUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-
+import { useAuthState } from 'react-firebase-hooks/auth'
+import auth from '../../../firebase.init';
 const Order = () => {
+    const [user] = useAuthState(auth);
     return (
         <div className='w-full h-full bg-success'>
             <form action="" className='text-black w-[570px] h-[510px] grid justify-center mx-auto mt-5'>
@@ -10,7 +12,7 @@ const Order = () => {
                 <input type="text" placeholder="Your Name/company Name" className="w-[570px] h-[60px] pl-2 rounded mb-4 focus:outline-none" />
                 <br />
 
-                <input type="email" placeholder="Your Email address" className="w-[570px] h-[60px] pl-2  rounded mb-4 focus:outline-none" />
+                <input type="email" placeholder="Your Email address" className="w-[570px] h-[60px] pl-2  rounded mb-4 focus:outline-none cursor-no-drop" value={user.email} readOnly />
                 <br />
 
                 <input type="text" placeholder="Graphic Design" className="w-[570px] h-[60px] pl-2 rounded mb-4 focus:outline-none" />

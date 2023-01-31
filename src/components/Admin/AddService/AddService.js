@@ -11,6 +11,9 @@ const AddService = () => {
                         <label htmlFor="" className='text-black font-medium text-base mb-[10px]'>Service Title</label>
                         <input type="text" placeholder="Enter Title" className="w-[450px] h-10 pl-2 rounded mb-4 focus:outline-none border-2 border-gray-200" />
 
+                        <label htmlFor="" className='text-black font-medium text-base mb-[10px]'>Price</label>
+                        <input type="text" placeholder="Enter Price" className="w-[450px] h-10 pl-2 rounded mb-4 focus:outline-none border-2 border-gray-200" />
+
                         <label htmlFor="" className='text-black font-medium text-basen mb-[10px]'>Description</label>
                         <textarea placeholder="Enter Description" className="w-[450px] h-[122px] textarea textarea-bordered textarea-sm border-2 border-gray-200" ></textarea>
                     </div>
