@@ -1,32 +1,69 @@
 import { faCloudArrowUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
+import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth'
+import { useQuery } from 'react-query';
+import { useParams } from 'react-router-dom';
 import auth from '../../../firebase.init';
+import LoadingSpinner from '../../Shared/LoadingSpinner/LoadingSpinner';
 const Order = () => {
     const [user] = useAuthState(auth);
+    const param = useParams();
+    const { orderId } = param;
+    // console.log(orderId)
+    const [imageData, setImageData] = useState({})
+    const { data: services, isLoading } = useQuery(['services', orderId], () => fetch(`http://localhost:5000/v1/service/${orderId}`).then(response => response.json()));
+    console.log(services)
+    if (isLoading) {
+        return <LoadingSpinner></LoadingSpinner>
+    };
+
+    const handleImage = event => {
+        const imageFiles = event.target.files;
+        setImageData(imageFiles[0])
+    }
+
+    const handleOrder = (event) => {
+        event.preventDefault();
+        const company = event.target.company.value;
+        const description = event.target.description.value;
+        const price = event.target.price.value;
+
+        const orderDetails = {
+            email: user.email,
+            companyName: company,
+            projectDescription: description,
+            price: price,
+        }
+
+
+
+    }
+
+
+
     return (
         <div className='w-full h-full bg-success'>
-            <form action="" className='text-black w-[570px] h-[510px] grid justify-center mx-auto mt-5'>
+            <form action="" onSubmit={handleOrder} className='text-black w-[570px] h-[510px] grid justify-center mx-auto mt-5'>
 
-                <input type="text" placeholder="Your Name/company Name" className="w-[570px] h-[60px] pl-2 rounded mb-4 focus:outline-none" />
+                <input type="text" name='company' placeholder="Your Name/company Name" className="w-[570px] h-[60px] pl-2 rounded mb-4 focus:outline-none" required />
                 <br />
 
                 <input type="email" placeholder="Your Email address" className="w-[570px] h-[60px] pl-2  rounded mb-4 focus:outline-none cursor-no-drop" value={user.email} readOnly />
                 <br />
 
-                <input type="text" placeholder="Graphic Design" className="w-[570px] h-[60px] pl-2 rounded mb-4 focus:outline-none" />
+                <input type="text" placeholder={services?.name} className="w-[570px] h-[60px] pl-2 rounded mb-4 focus:outline-none cursor-no-drop" readOnly />
                 <br />
 
-                <textarea placeholder="Project Details" className="w-[570px] h-[112px] pl-2 rounded mb-4 focus:outline-none" ></textarea>
+                <textarea name='description' placeholder="Project Details" className="w-[570px] h-[112px] pl-2 rounded mb-4 focus:outline-none" required></textarea>
 
                 <br />
 
                 <div className='flex items-center mb-2'>
 
-                    <input type="text" className='w-[284px] pl-2 mr-4 h-[60px] rounded focus:outline-none' name="price" placeholder='price' id="" />
+                    <input type="text" className='w-[284px] pl-2 mr-4 h-[60px] rounded focus:outline-none' name="price" placeholder='price' id="" required />
 
-                    <input className='border-black w-[170px] h-[60px]' type="file" name="" id="actual-btn" hidden />
+                    <input onChange={handleImage} className='border-black w-[170px] h-[60px]' type="file" name="file" id="actual-btn" hidden required />
 
                     <label htmlFor="actual-btn" className='grid content-center bg-success text-warning w-[270px] h-[60px] text-center rounded-[5px] border-2 border-warning'><span><FontAwesomeIcon icon={faCloudArrowUp}></FontAwesomeIcon> Upload Project File</span></label>
                 </div>

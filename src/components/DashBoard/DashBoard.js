@@ -55,7 +55,7 @@ const DashBoard = () => {
                         </CustomLink>
                     </li>
                     <li className='mb-2'>
-                        <CustomLink to={'/dashboard/order'}>
+                        <CustomLink to={'/dashboard/order/:orderId'}>
                             <span>
                                 <FontAwesomeIcon className='mr-2' icon={faCartShopping}></FontAwesomeIcon>
                                 Order

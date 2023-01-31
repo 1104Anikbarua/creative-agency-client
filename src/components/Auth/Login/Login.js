@@ -52,7 +52,9 @@ const Login = () => {
         <>
             <div className='w-[1170px] mx-auto mt-20'>
                 <div className='mb-11'>
-                    <img className='w-[170px] h-[48px] mx-auto' src={logo} alt="" />
+                    <Link to={'/home'}>
+                        <img className='w-[170px] h-[48px] mx-auto' src={logo} alt="" />
+                    </Link>
                 </div>
                 <div className='w-[570px] border-2 border-slate-200 h-[460px] mx-auto'>
                     <form onSubmit={handleSubmit(onSubmit)}

@@ -32,7 +32,7 @@ function App() {
 
           <Route path='makeadmin' element={<MakeAdmin></MakeAdmin>}></Route>
 
-          <Route path='order' element={<Order></Order>}></Route>
+          <Route path='order/:orderId' element={<Order></Order>}></Route>
 
           <Route path='review' element={<Review></Review>}></Route>
         </Route>
