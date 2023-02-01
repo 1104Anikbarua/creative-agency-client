@@ -20,7 +20,7 @@ const HomeServices = () => {
     // console.log(services)
 
     return (
-        <div className='mt-52 max-w-[1170px] mx-auto mb-28'>
+        <div id='service' className='mt-52 max-w-[1170px] mx-auto mb-28'>
             <h1 className='font-semibold text-[34px] text-center text-secondary'>Provide awesome <span className='text-accent'>services</span></h1>
             <div className='grid lg:grid-cols-3 gap-28'>
                 {
