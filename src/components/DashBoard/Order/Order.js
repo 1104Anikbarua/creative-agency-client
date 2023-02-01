@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import auth from '../../../firebase.init';
 import LoadingSpinner from '../../Shared/LoadingSpinner/LoadingSpinner';
 const Order = () => {
@@ -13,18 +14,33 @@ const Order = () => {
     // console.log(orderId)
     const [imageData, setImageData] = useState({})
     const { data: services, isLoading } = useQuery(['services', orderId], () => fetch(`http://localhost:5000/v1/service/${orderId}`).then(response => response.json()));
-    console.log(services)
+    // console.log(services)
     if (isLoading) {
         return <LoadingSpinner></LoadingSpinner>
     };
 
     const handleImage = event => {
         const imageFiles = event.target.files;
+        console.log(imageFiles)
         setImageData(imageFiles[0])
     }
 
+    const imageKey = 'd531be8065497b95757adf0fefa4e0ab'
+
     const handleOrder = (event) => {
         event.preventDefault();
+        const image = imageData;
+        const formData = new FormData();
+        formData.append('image', image);
+
+        // fetch(`https://api.imgbb.com/1/upload?key=${imageKey}`, {
+        //     method: 'POST',
+        //     body: formData
+        // })
+        //     .then(response => response.json())
+        //     .then(data => {
+        // if (data.success) {
+        // const image = data.data.url;
         const company = event.target.company.value;
         const description = event.target.description.value;
         const price = event.target.price.value;
@@ -34,13 +50,28 @@ const Order = () => {
             companyName: company,
             projectDescription: description,
             price: price,
-        }
+            projectName: services.name,
+            projectImage: image,
+        };
+        console.log(orderDetails)
+        fetch('http://localhost:5000/v1/clientorder', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(orderDetails)
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.insertedId) {
+                    toast.success('Order Post Successfully')
+                }
+            })
 
-
+        // }
+        // })
 
     }
-
-
 
     return (
         <div className='w-full h-full bg-success'>
@@ -52,7 +83,7 @@ const Order = () => {
                 <input type="email" placeholder="Your Email address" className="w-[570px] h-[60px] pl-2  rounded mb-4 focus:outline-none cursor-no-drop" value={user.email} readOnly />
                 <br />
 
-                <input type="text" placeholder={services?.name} className="w-[570px] h-[60px] pl-2 rounded mb-4 focus:outline-none cursor-no-drop" readOnly />
+                <input type="text" value={services?.name} className="text-black w-[570px] h-[60px] pl-2 rounded mb-4 focus:outline-none cursor-no-drop" readOnly />
                 <br />
 
                 <textarea name='description' placeholder="Project Details" className="w-[570px] h-[112px] pl-2 rounded mb-4 focus:outline-none" required></textarea>

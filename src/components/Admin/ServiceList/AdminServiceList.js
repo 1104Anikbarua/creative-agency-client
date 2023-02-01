@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-const ServiceList = () => {
+const AdminServiceList = () => {
     const params = useParams();
     console.log(params)
     return (
@@ -11,4 +11,4 @@ const ServiceList = () => {
     );
 };
 
-export default ServiceList;
+export default AdminServiceList;

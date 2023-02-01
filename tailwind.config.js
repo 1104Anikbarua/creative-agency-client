@@ -21,6 +21,7 @@ module.exports = {
           info_content: '#242A65',
           success: '#DEFFED',
           warning: '#009444',
+          error: '#FFE3E3',
 
         },
       },
