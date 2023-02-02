@@ -62,7 +62,7 @@ const Order = () => {
                         projectName: services.name,
                         projectImage: image,
                     };
-                    console.log(orderDetails)
+                    // console.log(orderDetails)
                     fetch('http://localhost:5000/v1/clientorder', {
                         method: 'POST',
                         headers: {
@@ -92,13 +92,13 @@ const Order = () => {
                 <div className='form-control w-full max-w-xs'>
                     <input type="text"
                         name='company'
+                        className="w-[570px] h-[60px] pl-2 rounded mb-4 focus:outline-none"
                         {...register('company', {
                             required: {
                                 value: true,
                                 message: '!Company name is Required',
                             },
                         })} placeholder="Your Name/Company Name"
-                        className="w-[570px] h-[60px] pl-2 rounded mb-4 focus:outline-none"
                     />
                     <label htmlFor="">
                         {errors.company?.type === 'required' && <span className='label-text-alt text-base text-red-600'>{errors.company?.message}</span>}
@@ -139,21 +139,13 @@ const Order = () => {
                     </label>
                 </div>
 
-                {/* <input type="text" name='company' placeholder="Your Name/company Name" className="w-[570px] h-[60px] pl-2 rounded mb-4 focus:outline-none" required />
-                <br />
-
-                <input type="email" placeholder="Your Email address" className="w-[570px] h-[60px] pl-2  rounded mb-4 focus:outline-none cursor-no-drop" value={user.email} readOnly />
-                <br />
-
-                <input type="text" value={services?.name} className="text-black w-[570px] h-[60px] pl-2 rounded mb-4 focus:outline-none cursor-no-drop" readOnly />
-                <br /> */}
                 <div className='form-control w-full max-w-xs'>
                     <textarea name='description' {...register('description', {
                         required: {
                             value: true,
-                            message: '!Description is Required',
+                            message: '!Project Description is Required',
                         },
-                    })} placeholder="Project Details" className="w-[570px] h-[112px] pl-2 rounded mb-4 focus:outline-none" required></textarea>
+                    })} placeholder="Project Description" className="w-[570px] h-[112px] pl-2 rounded mb-4 focus:outline-none"></textarea>
                     <label htmlFor="">
                         {errors.description?.type === 'required' && <span className='label-text-alt text-base text-red-600'>{errors.description?.message}</span>}
                     </label>
@@ -177,9 +169,7 @@ const Order = () => {
                         </label>
                     </div>
 
-                    {/* <input type="text" className='w-[284px] pl-2 mr-4 h-[60px] rounded focus:outline-none' name="price" placeholder='price' id="" required /> */}
-
-                    <input onChange={(e) => setImageData(e.target.files[0])} className='border-black w-[170px] h-[60px]' type="file" name="file" id="actual-btn" hidden required />
+                    <input onChange={(e) => setImageData(e.target.files[0])} className='border-black w-[170px] h-[60px]' type="file" name="file" id="actual-btn" hidden />
 
                     <label htmlFor="actual-btn" className='grid content-center bg-success text-warning w-[270px] h-[60px] text-center rounded-[5px] border-2 border-warning'><span><FontAwesomeIcon icon={faCloudArrowUp}></FontAwesomeIcon> Upload Project File</span></label>
                 </div>

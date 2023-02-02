@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import auth from '../../../firebase.init';
 import logo from '../../../images/logos/logo.png';
 import google from '../../../images/Social/google.png';
-import { useCreateUserWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import LoadingSpinner from '../../Shared/LoadingSpinner/LoadingSpinner';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
@@ -20,10 +20,14 @@ const Signup = () => {
 
     const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
 
-    const onSubmit = (data) => {
+    const [updateProfile, profileUpdating, profileError] = useUpdateProfile(auth);
+
+    const onSubmit = async (data) => {
         const email = data.email;
         const password = data.password;
-        createUserWithEmailAndPassword(email, password);
+        const name = data.name;
+        await createUserWithEmailAndPassword(email, password);
+        await updateProfile({ displayName: name });
         reset();
     };
     const navigate = useNavigate();
@@ -37,18 +41,20 @@ const Signup = () => {
 
 
 
-    if (emailLoading || googleLoading) {
+    if (emailLoading || googleLoading || profileUpdating) {
         return <LoadingSpinner></LoadingSpinner>
     }
     let errorMessage;
-    if (emailError || googleError) {
-        errorMessage = <p className='text-red-600'>{emailError?.message}{googleError?.message}</p>
+    if (emailError || googleError || profileError) {
+        errorMessage = <p className='text-red-600'>{emailError?.message}{googleError?.message}{profileError.message}</p>
     }
 
     return (
         <div className='w-[1170px] h-screen mx-auto mt-20'>
             <div className='mb-11'>
-                <img className='w-[170px] h-[48px] mx-auto' src={logo} alt="" />
+                <Link to={'/home'}>
+                    <img className='w-[170px] h-[48px] mx-auto' src={logo} alt="" />
+                </Link>
             </div>
             <div className='w-[570px] border-2 border-slate-200 h-[570px] mx-auto rounded'>
                 <form onSubmit={handleSubmit(onSubmit)}
@@ -126,7 +132,7 @@ const Signup = () => {
                     {errorMessage}
 
 
-                    <input className='cursor-pointer bg-secondary input input-bordered input-sm w-full max-w-xs mb-2' type="submit" value="Login" />
+                    <input className='cursor-pointer bg-secondary input input-bordered input-sm w-full max-w-xs mb-2' type="submit" value="Register" />
 
 
                     <p className='text-base text-center text-secondary my-4'>Have an account?<Link className='text-blue-600' to={'/login'}> Log in Now</Link></p>

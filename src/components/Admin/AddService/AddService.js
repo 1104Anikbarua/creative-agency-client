@@ -5,7 +5,7 @@ import React from 'react';
 const AddService = () => {
     return (
         <div className='w-full bg-success h-screen relative'>
-            <div className='max-w-[1044px] h-[305px] bg-white rounded-[20px] mx-auto'>
+            <div className='max-w-[1044px] h-[405px] bg-white rounded-[20px] mx-auto'>
                 <form action="" className='grid lg:grid-cols-2 p-8 m-8 gap-12'>
                     <div>
                         <label htmlFor="" className='text-black font-medium text-base mb-[10px]'>Service Title</label>
