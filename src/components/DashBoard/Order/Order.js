@@ -52,13 +52,13 @@ const Order = () => {
                     // console.log(image)
                     const company = data.company;
                     const description = data.description;
-                    const price = data.price;
+                    // const price = data.price;
 
                     const orderDetails = {
                         email: user.email,
                         companyName: company,
                         projectDescription: description,
-                        price: price,
+                        price: services.price,
                         projectName: services.name,
                         projectImage: image,
                     };
@@ -162,14 +162,16 @@ const Order = () => {
                                     message: '!Price is Required',
                                 },
                             })} placeholder="Price"
+                            value={services?.price}
                             className='w-[284px] pl-2 mr-4 h-[60px] rounded focus:outline-none'
+                            readOnly
                         />
                         <label htmlFor="">
                             {errors.price?.type === 'required' && <span className='label-text-alt text-base text-red-600'>{errors.price?.message}</span>}
                         </label>
                     </div>
 
-                    <input onChange={(e) => setImageData(e.target.files[0])} className='border-black w-[170px] h-[60px]' type="file" name="file" id="actual-btn" hidden />
+                    <input onChange={(e) => setImageData(e.target.files[0])} className='border-black w-[170px] h-[60px]' type="file" name="file" id="actual-btn" hidden multiple />
 
                     <label htmlFor="actual-btn" className='grid content-center bg-success text-warning w-[270px] h-[60px] text-center rounded-[5px] border-2 border-warning'><span><FontAwesomeIcon icon={faCloudArrowUp}></FontAwesomeIcon> Upload Project File</span></label>
                 </div>

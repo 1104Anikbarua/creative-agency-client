@@ -19,17 +19,10 @@ const ServiceList = () => {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`
         }
     }).then(response => response.json()));
-    // console.log(services)
+    console.log(services)
     if (isLoading) {
         return <LoadingSpinner></LoadingSpinner>
     }
-
-
-    // const services = [
-    //     { img: service1, name: 'Web & Mobile design', description: 'We craft stunning and amazing web UI, using a well drrafted UX to fit your product.' },
-    //     { img: service2, name: 'Graphic design', description: 'Amazing flyers, social media posts and brand representations that would make your brand stand out.' },
-    //     { img: service3, name: 'Web development', description: 'With well written codes, we build amazing apps for all platforms, mobile and web apps in general.' },
-    // ];
 
     const paid = false;
     return (
@@ -45,8 +38,13 @@ const ServiceList = () => {
 
                                     </div>
                                     <div>
-                                        {paid ? <Link to={`${service._id}`}><button className='w-[108px] h-[40px] bg-error rounded text-green-400 text-base' style={{ backgroundColor: '#C6FFE0' }}>Download</button></Link> : <Link to={`${service._id}`}>
-                                            <button className='w-[108px] h-[40px] bg-error rounded text-red-400 text-base'>Pay</button></Link>}
+                                        {paid ?
+                                            <Link to={`${service._id}`}><button className='w-[108px] h-[40px] bg-error rounded text-green-400 text-base' style={{ backgroundColor: '#C6FFE0' }}
+
+                                                disabled={paid === true}
+                                            >Download</button></Link> :
+                                            <Link to={`${service._id}`}>
+                                                <button className='w-[108px] h-[40px] bg-error rounded text-red-400 text-base'>Pay</button></Link>}
 
                                     </div>
                                 </div>
