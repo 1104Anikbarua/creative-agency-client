@@ -6,6 +6,7 @@ import logo from '../../../images/logos/logo.png';
 import google from '../../../images/Social/google.png';
 import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import LoadingSpinner from '../../Shared/LoadingSpinner/LoadingSpinner';
+import useToken from '../../Hook/useToken';
 
 const Login = () => {
 
@@ -29,12 +30,15 @@ const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
+    // console.log(from)
+
+    const [token] = useToken(emailUser || googleUser)
 
     useEffect(() => {
-        if (emailUser || googleUser) {
+        if (token) {
             navigate(from, { replace: true });
         }
-    }, [emailUser, googleUser, from, navigate])
+    }, [token, from, navigate])
 
 
     if (emailLoading || googleLoading) {

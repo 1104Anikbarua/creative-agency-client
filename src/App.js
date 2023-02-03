@@ -13,6 +13,7 @@ import Order from './components/DashBoard/Order/Order';
 import Review from './components/DashBoard/Review/Review';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import PaymentPage from './components/DashBoard/PaymentPage/PaymentPage';
 
 function App() {
   return (
@@ -20,8 +21,16 @@ function App() {
       {/* <Header></Header> */}
       <Routes>
 
-        <Route path='/' element={<Home></Home>}></Route>
-        <Route path='/home' element={<Home></Home>}></Route>
+        <Route path='/' element={
+          // <RequireAuth>
+          // </RequireAuth>
+          <Home></Home>
+        }></Route>
+        <Route path='/home' element={
+          // <RequireAuth>
+          // </RequireAuth>
+          <Home></Home>
+        }></Route>
 
         <Route path='/dashboard' element={
           <RequireAuth>
@@ -37,6 +46,8 @@ function App() {
           <Route path='order/:orderId' element={<Order></Order>}></Route>
 
           <Route path='review' element={<Review></Review>}></Route>
+
+          <Route path=':productId' element={<PaymentPage></PaymentPage>}></Route>
         </Route>
 
         <Route path='/login' element={<Login></Login>}></Route>

@@ -6,6 +6,7 @@ import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfil
 import LoadingSpinner from '../../Shared/LoadingSpinner/LoadingSpinner';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
+import useToken from '../../Hook/useToken';
 
 const Signup = () => {
 
@@ -32,12 +33,14 @@ const Signup = () => {
     };
     const navigate = useNavigate();
 
+    const [token] = useToken(emailUser || googleUser)
+
     useEffect(() => {
 
-        if (emailUser || googleUser) {
+        if (token) {
             navigate('/')
         }
-    }, [emailUser, googleUser, navigate])
+    }, [token, navigate])
 
 
 
@@ -46,7 +49,7 @@ const Signup = () => {
     }
     let errorMessage;
     if (emailError || googleError || profileError) {
-        errorMessage = <p className='text-red-600'>{emailError?.message}{googleError?.message}{profileError.message}</p>
+        errorMessage = <p className='text-red-600'>{emailError?.message}{googleError?.message}{profileError?.message}</p>
     }
 
     return (
