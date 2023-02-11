@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useForm } from 'react-hook-form';
 import { useQuery } from 'react-query';
-import { useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import auth from '../../../firebase.init';
 import LoadingSpinner from '../../Shared/LoadingSpinner/LoadingSpinner';
@@ -13,6 +13,7 @@ const Order = () => {
     const param = useParams();
     const { orderId } = param;
     // console.log(orderId)
+    const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
     const [imageData, setImageData] = useState({})
@@ -21,16 +22,6 @@ const Order = () => {
     if (isLoading) {
         return <LoadingSpinner></LoadingSpinner>
     };
-
-
-
-    // const handleImage = event => {
-    //     const imageFiles = event.target.files;
-    //     console.log(imageFiles)
-    //     setImageData(imageFiles[0])
-    // }
-
-    // const imageKey = '721322183797287'
 
     const handleOrder = (data) => {
         // event.preventDefault();
@@ -74,6 +65,7 @@ const Order = () => {
                         .then(data => {
                             if (data.insertedId) {
                                 toast.success('Order Post Successfully')
+                                navigate(`/dashboard`)
                             }
                             else {
                                 toast.error('Failed to post Order');
@@ -145,7 +137,7 @@ const Order = () => {
                             value: true,
                             message: '!Project Description is Required',
                         },
-                    })} placeholder="Project Description" className="w-[570px] h-[112px] pl-2 rounded mb-4 focus:outline-none"></textarea>
+                    })} placeholder="Project Description" className="w-[570px] h-[112px] pl-2 rounded mb-4 focus:outline-none" autoComplete='on'></textarea>
                     <label htmlFor="">
                         {errors.description?.type === 'required' && <span className='label-text-alt text-base text-red-600'>{errors.description?.message}</span>}
                     </label>

@@ -13,7 +13,7 @@ import Order from './components/DashBoard/Order/Order';
 import Review from './components/DashBoard/Review/Review';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import PaymentPage from './components/DashBoard/PaymentPage/PaymentPage';
+// import PaymentPage from './components/DashBoard/PaymentPage/PaymentPage';
 
 function App() {
   return (
@@ -47,7 +47,7 @@ function App() {
 
           <Route path='review' element={<Review></Review>}></Route>
 
-          <Route path=':productId' element={<PaymentPage></PaymentPage>}></Route>
+          {/* <Route path=':productId' element={<PaymentPage></PaymentPage>}></Route> */}
         </Route>
 
         <Route path='/login' element={<Login></Login>}></Route>
